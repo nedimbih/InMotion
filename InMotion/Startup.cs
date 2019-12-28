@@ -15,6 +15,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using InMotion.Areas.Identity;
 using InMotion.Data;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using InMotion.Services;
 
 namespace InMotion {
 	public class Startup {
@@ -28,10 +30,14 @@ namespace InMotion {
 		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services) {
 			services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseSqlServer(
-					Configuration.GetConnectionString("DefaultConnection")));
+				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount=true)
 				.AddEntityFrameworkStores<ApplicationDbContext>();
+
+			services.AddTransient<IEmailSender, EmailSender>();
+			services.Configure<AuthMessageSenderOptions>(Configuration);
+
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
 			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
