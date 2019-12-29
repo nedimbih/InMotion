@@ -17,6 +17,11 @@ namespace InMotion.Data.Migrations {
 					table.PrimaryKey("PK_AspNetRoles", x => x.Id);
 				});
 
+			migrationBuilder.InsertData(
+				table: "AspNetRoles",
+				columns: new[] {"Id",  "Name", "NormalizedName" },
+				values: new object[] { "001",  "Admin", "ADMIN" });
+
 			migrationBuilder.CreateTable(
 				name: "AspNetUsers",
 				columns: table => new {
