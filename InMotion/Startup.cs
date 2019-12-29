@@ -32,7 +32,17 @@ namespace InMotion {
 			services.AddDbContext<ApplicationDbContext>(options =>
 				options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 			
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount=true)
+			services.AddDefaultIdentity<IdentityUser>(options => { 
+					options.SignIn.RequireConfirmedAccount=true;
+					options.Password.RequiredLength = 3;
+					options.Password.RequireDigit = false;
+					options.Password.RequireNonAlphanumeric=false;
+					options.Password.RequireLowercase=false;
+					options.Password.RequireUppercase=false;
+					options.Password.RequireDigit=false;
+					options.User.RequireUniqueEmail=true;
+			})
+				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<ApplicationDbContext>();
 
 			services.AddTransient<IEmailSender, EmailSender>();
@@ -66,6 +76,7 @@ namespace InMotion {
 			app.UseEndpoints(endpoints => {
 				endpoints.MapControllers();
 				endpoints.MapBlazorHub();
+				endpoints.MapRazorPages();
 				endpoints.MapFallbackToPage("/_Host");
 			});
 		}
