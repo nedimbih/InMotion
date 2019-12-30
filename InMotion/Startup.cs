@@ -55,6 +55,8 @@ namespace InMotion {
 			services.AddServerSideBlazor();
 			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 			services.AddScoped<IMessageService, MessageService>();
+			services.AddScoped<INotificationService, NotificationService>();
+
 			services.AddSingleton<HttpClient>();
 			services.AddScoped<IMessagesRepository,MessagesRepository>();
 		}

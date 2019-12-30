@@ -1,5 +1,23 @@
 ﻿@page "/"
 
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject INotificationService notifications
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+@if (userIsAuthenticated && hasNotification)
+        {
+<div class="alert alert-info">
+    <NavLink class="nav-link" href="readmessages">Check out messages.</NavLink>
+    <strong>Info:</strong> There are new messages.
+</div>
+        }
+@code{
+    bool userIsAuthenticated, hasNotification;
+
+    protected override async Task OnInitializedAsync() {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        userIsAuthenticated = authState.User.Identity.IsAuthenticated;
+        hasNotification = notifications.HasNewMessages();
+    }
+}

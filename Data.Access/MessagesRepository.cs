@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace InMotion.Data.Access {
 	public class MessagesRepository : IMessagesRepository {
@@ -12,9 +13,23 @@ namespace InMotion.Data.Access {
 			_context=context;
 		}
 
-		public async void SaveMessage(Message message) {
+		public void SaveMessage(Message message) {
 			_context.Messages.Add(message);
 			 _context.SaveChanges();
+		}
+
+		public List<Message> GetUnreadMessages() {
+			var newMsgs = _context.Messages.Where<Message>(m=>m.Seen==false).ToList();
+			return newMsgs;
+		}
+
+		public void SetAllAsSeen() {
+			var newMsgs = GetUnreadMessages();
+			foreach (var message in newMsgs) {
+				message.Seen=true;
+
+			}
+			_context.SaveChanges();
 		}
 	}
 }

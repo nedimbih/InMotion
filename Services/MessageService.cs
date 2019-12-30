@@ -8,18 +8,25 @@ using System.Threading.Tasks;
 
 namespace InMotion.Services {
 	public class MessageService : IMessageService {
-		private ApplicationDbContext _context;
+		private IMessagesRepository _repo;
 
-		public MessageService(ApplicationDbContext context) {
-			_context=context;
+		public MessageService(IMessagesRepository repo) {
+			_repo=repo;
 		}
 
-		public async Task<StringContent> prepareMessageAsync(Message message) {
+		public StringContent prepareMessageAsync(Message message) {
 			var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(message);
 			var content = new StringContent(jsonString, System.Text.Encoding.UTF8, "application/json");
 			return content; 
 		}
 
-		public Task SaveMessageAsync(Message message) => throw new NotImplementedException();
+		public List<Message> GetUnreadMessages() {
+			return _repo.GetUnreadMessages();
+		}
+
+		public void SetAsSeen() {
+			_repo.SetAllAsSeen();
+		}
+
 	}
 }

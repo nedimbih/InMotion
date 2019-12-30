@@ -1,0 +1,29 @@
+﻿@page "/readmessages"
+
+@inject IMessageService msgSrvc
+<h3>New Messages</h3>
+
+@foreach (var message in unreadMessages) {
+    <div class="alert alert-info">
+        <div>
+            <strong>@message.Name</strong>
+        </div>
+        <div>
+            @message.Text
+        </div>
+    </div>
+}
+<br />
+<button class="btn btn-primary" type="submit" @onclick="@SetAsSeen">Set all as seen</button>
+Note: Messages are not automatically set as seen.
+
+@code {
+    private List<Message> unreadMessages = null;
+
+    protected override async Task OnInitializedAsync() {
+        unreadMessages=msgSrvc.GetUnreadMessages();
+    }
+    private void SetAsSeen() {
+        msgSrvc.SetAsSeen();
+    }
+}
