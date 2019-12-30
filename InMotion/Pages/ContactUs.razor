@@ -2,6 +2,8 @@
 
 @inject HttpClient http
 @inject IMessageService msgSrvc
+@inject NavigationManager NavigationManager
+
 
 <h3>ContactUs</h3>
 
@@ -22,11 +24,11 @@
 
 
 @code {
-     private Message contactForm = new Message();
+    private Message contactForm = new Message();
 
-    private async Task HandleValidSubmit() {       
+    private async Task HandleValidSubmit() {
         StringContent content = msgSrvc.prepareMessageAsync(contactForm);
-        var status = await http.PostAsync("https://localhost:44359/messages", content); 
-        contactForm = new Message();
+        var status = await http.PostAsync(NavigationManager.BaseUri+"messages", content);
+        contactForm=new Message();
     }
 }

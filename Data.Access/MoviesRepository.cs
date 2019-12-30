@@ -29,6 +29,7 @@ namespace InMotion.Data.Access {
 
 		public void UpdateMovie(Movie movie) { 
 			_context.Update<Movie>(movie);
+			_context.SaveChanges();
 		}
 
 		public void DeleteMovie (Movie movie) {

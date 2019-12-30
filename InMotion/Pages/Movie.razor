@@ -31,12 +31,12 @@
     private async Task HandleValidSubmit() {
         StringContent content = movieSrvc.prepareMovieAsync(movieForm);
         if (movieForm.Id==null) {
-            var status = await http.PostAsync("https://localhost:44359/movies", content);
+            var status = await http.PostAsync(NavigationManager.BaseUri+"movies", content);
 
         } else {
-            var status = await http.PutAsync("https://localhost:44359/movies", content);
+            var status = await http.PutAsync(NavigationManager.BaseUri+"movies", content);
         }
-        NavigationManager.NavigateTo("/movies");
+       NavigationManager.NavigateTo("/movies");
     }
 
     protected override async Task OnInitializedAsync() {

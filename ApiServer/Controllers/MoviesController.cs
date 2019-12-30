@@ -35,8 +35,8 @@ namespace ApiServer.Controllers {
 		}
 
 		// PUT api/<controller>/5
-		[HttpPut("{id}")]
-		public void Put(string id, [FromBody]Movie movie) {
+		[HttpPut]
+		public void Put([FromBody]Movie movie) {
 			_repo.UpdateMovie(movie);
 		}
 
