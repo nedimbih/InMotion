@@ -1,0 +1,56 @@
+﻿@page "/contactus"
+
+@inject HttpClient http
+@inject IMessageService msgSrvc
+
+<h3>ContactUs</h3>
+
+<EditForm Model="@contactForm" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for=""> Name </label>
+        <InputText id="name" class="form-control" @bind-Value="contactForm.Name" />
+    </div>
+    <div class="form-group">
+        <label for=""> Message </label>
+        <InputTextArea id="message" class="form-control" @bind-Value="contactForm.Text" />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+<br />
+<button @onclick="@getFofecsts" class="btn btn-danger">povuci</button>
+@if (jsonforecasts==null) { } else {
+    @foreach (var person in jsonforecasts) {<div>@person.Date  i  @person.Summary</div>}
+}
+<br />
+<button @onclick="@getmsgs" class="btn btn-danger">povuci poruku</button>
+@if (msg==null) { } else {
+    <div>@msg.Text</div> 
+}
+
+@code {
+    private IEnumerable<ApiServer.WeatherForecast> jsonforecasts = null;
+    private Message msg = null;
+
+    private Message contactForm = new Message();
+
+    private async Task HandleValidSubmit() {
+
+        Console.WriteLine("OnValidSubmit");
+        
+        StringContent content = await msgSrvc.prepareMessageAsync(contactForm);
+        try { var status = await http.PostAsync("https://localhost:44359/messages", content); } catch { }
+
+
+    }
+    private async Task getFofecsts() {
+        jsonforecasts=await http.GetJsonAsync<IEnumerable<ApiServer.WeatherForecast>>("https://localhost:44359/WeatherForecast");
+    }
+
+    private async Task getmsgs() {
+        msg=await http.GetJsonAsync<Message>("https://localhost:44359/messages");
+    }
+}

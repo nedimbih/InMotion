@@ -17,6 +17,9 @@ using InMotion.Areas.Identity;
 using InMotion.Data;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using InMotion.Services;
+using InMotion.Data.Models;
+using InMotion.Data.Access;
+using System.Net.Http;
 
 namespace InMotion {
 	public class Startup {
@@ -47,11 +50,13 @@ namespace InMotion {
 
 			services.AddTransient<IEmailSender, EmailSender>();
 			services.Configure<AuthMessageSenderOptions>(Configuration);
-
+			
 			services.AddRazorPages();
 			services.AddServerSideBlazor();
 			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
-			services.AddSingleton<WeatherForecastService>();
+			services.AddScoped<IMessageService, MessageService>();
+			services.AddSingleton<HttpClient>();
+			services.AddScoped<IMessagesRepository,MessagesRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

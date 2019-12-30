@@ -3,20 +3,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51189",
-      "sslPort": 44359
+      "applicationUrl": "http://localhost:63303",
+      "sslPort": 44361
     }
   },
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "InMotion": {
+    "ApiServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
