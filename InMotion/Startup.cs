@@ -56,9 +56,11 @@ namespace InMotion {
 			services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 			services.AddScoped<IMessageService, MessageService>();
 			services.AddScoped<INotificationService, NotificationService>();
+			services.AddScoped<IMovieService, MovieService>();
 
 			services.AddSingleton<HttpClient>();
 			services.AddScoped<IMessagesRepository,MessagesRepository>();
+			services.AddScoped<IMoviesRepository, MoviesRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BL_and_Repo\BL_and_Repo.csproj" />
     <ProjectReference Include="..\Data.Access\Data.Access.csproj" />
     <ProjectReference Include="..\Data.Models\Data.Models.csproj" />
   </ItemGroup>

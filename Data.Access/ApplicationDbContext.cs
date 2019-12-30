@@ -15,5 +15,6 @@ namespace InMotion.Data.Access {
         }
 
 		public DbSet<Message> Messages { get;set;}
+		public DbSet<Movie>  Movies { get; set; }
 	}
 }

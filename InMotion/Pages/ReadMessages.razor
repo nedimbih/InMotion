@@ -1,6 +1,8 @@
 ﻿@page "/readmessages"
 
 @inject IMessageService msgSrvc
+@inject NavigationManager NavigationManager
+
 <h3>New Messages</h3>
 
 @foreach (var message in unreadMessages) {
@@ -25,5 +27,6 @@ Note: Messages are not automatically set as seen.
     }
     private void SetAsSeen() {
         msgSrvc.SetAsSeen();
+        NavigationManager.NavigateTo("/");
     }
 }

@@ -1,0 +1,47 @@
+﻿@page  "/movie"
+@page  "/movie/{id}"
+
+@inject HttpClient http
+@inject IMovieService movieSrvc
+@inject NavigationManager NavigationManager
+
+<h3>Movie</h3>
+
+<EditForm Model="@movieForm" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for=""> Title </label>
+        <InputText id="title" class="form-control" @bind-Value="movieForm.Title" />
+    </div>
+    <div class="form-group">
+        <label for=""> Genre </label>
+        <InputTextArea id="genre" class="form-control" @bind-Value="movieForm.Genre" />
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+
+    public InMotion.Data.Models.Movie movieForm = new InMotion.Data.Models.Movie();
+
+    private async Task HandleValidSubmit() {
+        StringContent content = movieSrvc.prepareMovieAsync(movieForm);
+        if (movieForm.Id==null) {
+            var status = await http.PostAsync("https://localhost:44359/movies", content);
+
+        } else {
+            var status = await http.PutAsync("https://localhost:44359/movies", content);
+        }
+        NavigationManager.NavigateTo("/movies");
+    }
+
+    protected override async Task OnInitializedAsync() {
+        if (id!=null) {
+            movieForm=movieSrvc.GetMovie(id);
+        }
+    }
+}

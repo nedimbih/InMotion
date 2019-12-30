@@ -1,0 +1,32 @@
+﻿@page  "/movies"
+
+@inject IMovieService   movieSrvc
+@inject NavigationManager NavigationManager
+<h3>Movies</h3>
+<NavLink class="nav-link" href="movie">Add Movie</NavLink>
+
+<br />
+@foreach (var movie in movies) {
+    <div class="alert alert-info">
+        <div>
+            <strong>@movie.Title</strong>
+        </div>
+        <div>
+            @movie.Genre
+        </div>
+        <button class="btn btn-primary" type="submit" @onclick="(() => {EditMovie(movie.Id); })">Edit</button>
+    </div>
+}
+
+
+@code {
+    private List<InMotion.Data.Models.Movie> movies = null;
+
+    protected override async Task OnInitializedAsync() {
+        movies=movieSrvc.GetMovies();
+    }
+
+    private void EditMovie(string id) {
+        NavigationManager.NavigateTo("/movie/"+id);
+    }
+}

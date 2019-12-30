@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Access", "Data.Access\Data.Access.csproj", "{70FEEB47-BB21-41C7-9E15-1CC63712CBB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiServer", "ApiServer\ApiServer.csproj", "{D431B5B5-E00F-4DC3-BDF3-4929ADECBF87}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL_and_Repo", "BL_and_Repo\BL_and_Repo.csproj", "{D61A3BFC-8B3E-45FD-96C3-4D82987AD297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiServer", "ApiServer\ApiServer.csproj", "{D431B5B5-E00F-4DC3-BDF3-4929ADECBF87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{D431B5B5-E00F-4DC3-BDF3-4929ADECBF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D431B5B5-E00F-4DC3-BDF3-4929ADECBF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D431B5B5-E00F-4DC3-BDF3-4929ADECBF87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D61A3BFC-8B3E-45FD-96C3-4D82987AD297}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D61A3BFC-8B3E-45FD-96C3-4D82987AD297}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D61A3BFC-8B3E-45FD-96C3-4D82987AD297}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D61A3BFC-8B3E-45FD-96C3-4D82987AD297}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
